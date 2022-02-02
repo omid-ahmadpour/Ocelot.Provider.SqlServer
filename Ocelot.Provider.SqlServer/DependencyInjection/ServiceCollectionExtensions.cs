@@ -16,20 +16,9 @@ namespace Ocelot.Provider.SqlServer.DependencyInjection
             builder.Services.AddSingleton(
                 resolver => resolver.GetRequiredService<IOptions<ConfigAuthLimitCacheOptions>>().Value);
 
-            // Ocelot
-            //builder.Services.AddSingleton(DataBaseConfigurationProvider.Get);
-            //builder.Services.AddHostedService<FileConfigurationPoller>();
             builder.Services.AddSingleton<IFileConfigurationRepository, SqlServerFileConfigurationRepository>();
 
             return builder;
         }
-
-        //public static IOcelotBuilder AddOcelotApiCallLimit(this IOcelotBuilder builder, IConfiguration configuration)
-        //{
-        //    builder.Services.AddSingleton<IRedisRepository, RedisRepository>();
-        //    builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(configuration["CacheConfig:RedisCache:Connection:0"]));
-
-        //    return builder;
-        //}
     }
 }
