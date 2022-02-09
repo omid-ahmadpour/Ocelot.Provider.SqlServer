@@ -1,9 +1,21 @@
+using Ocelot.DependencyInjection;
+using Ocelot.Provider.SqlServer.DependencyInjection;
+using Ocelot.Provider.SqlServer.Middleware;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddOcelot()
+    .AddSqlServerForRoutesStorage(options =>
+    {
+        options.DbConnectionStrings = builder.Configuration.GetConnectionString("SqlServerDb");
+        options.MigrationsAssembly = Assembly.GetExecutingAssembly().FullName;
+    });
 
 var app = builder.Build();
 
@@ -13,6 +25,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCustomOcelot().Wait();
 
 app.UseHttpsRedirection();
 
@@ -36,8 +50,3 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast");
 
 app.Run();
-
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
