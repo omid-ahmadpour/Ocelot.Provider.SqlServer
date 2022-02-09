@@ -27,7 +27,12 @@
         public string DbConnectionStrings { get; set; }
 
         /// <summary>
-        /// Redis
+        /// MigrationsAssembly
+        /// </summary>
+        public string MigrationsAssembly { get; set; }
+
+        /// <summary>
+        /// Redis Connections
         /// </summary>
         public List<string> RedisConnectionStrings { get; set; }
     }

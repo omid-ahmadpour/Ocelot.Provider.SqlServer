@@ -20,7 +20,8 @@ namespace Ocelot.Provider.SqlServer.Db
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_appConfigs.DbConnectionStrings);
+            optionsBuilder.UseSqlServer(_appConfigs.DbConnectionStrings,
+                b => b.MigrationsAssembly(_appConfigs.MigrationsAssembly));
         }
     }
 }
