@@ -1,6 +1,6 @@
 ﻿namespace Ocelot.Provider.SqlServer.Configuration
 {
-    public class ConfigAuthLimitCacheOptions
+    public class AppConfigs
     {
         /// <summary>
         /// true

@@ -9,12 +9,12 @@ namespace Ocelot.Provider.SqlServer.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IOcelotBuilder AddSqlServerForRoutesStorage(this IOcelotBuilder builder, Action<ConfigAuthLimitCacheOptions> option)
+        public static IOcelotBuilder AddSqlServerForRoutesStorage(this IOcelotBuilder builder, Action<AppConfigs> option)
         {
             builder.Services.Configure(option);
 
             builder.Services.AddSingleton(
-                resolver => resolver.GetRequiredService<IOptions<ConfigAuthLimitCacheOptions>>().Value);
+                resolver => resolver.GetRequiredService<IOptions<AppConfigs>>().Value);
 
             builder.Services.AddSingleton<IFileConfigurationRepository, SqlServerFileConfigurationRepository>();
 

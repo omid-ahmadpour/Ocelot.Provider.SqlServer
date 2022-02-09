@@ -15,9 +15,9 @@ namespace Ocelot.Provider.SqlServer.Repository
     public class SqlServerFileConfigurationRepository : IFileConfigurationRepository
     {
         private readonly IOcelotCache<FileConfiguration> _cache;
-        private readonly ConfigAuthLimitCacheOptions _option;
+        private readonly AppConfigs _option;
 
-        public SqlServerFileConfigurationRepository(ConfigAuthLimitCacheOptions option,
+        public SqlServerFileConfigurationRepository(AppConfigs option,
             IOcelotCache<FileConfiguration> cache, IOcelotLoggerFactory loggerFactory)
         {
             _option = option;
@@ -76,7 +76,7 @@ namespace Ocelot.Provider.SqlServer.Repository
                     {
                         const string routeSql = "usp_OcelotRoutes_GetAll";
 
-                        var ocelotRoutes = await connection.QueryAsync<OcelotRoutes>(routeSql,
+                        var ocelotRoutes = await connection.QueryAsync<OcelotRoute>(routeSql,
                             new { OcelotGlobalConfigurationId = result.Id });
 
                         if (ocelotRoutes != null && ocelotRoutes.Any())
