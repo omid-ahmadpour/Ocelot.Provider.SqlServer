@@ -14,13 +14,13 @@ namespace Ocelot.Provider.SqlServer.Middleware
 {
     public static class OcelotMiddlewareExtensions
     {
-        public static async Task<IApplicationBuilder> UseCustomOcelot(this IApplicationBuilder builder)
+        public static async Task<IApplicationBuilder> UseOcelotWithSqlServerProvider(this IApplicationBuilder builder)
         {
-            await builder.UseCustomOcelot(new OcelotPipelineConfiguration());
+            await builder.UseOcelotWithSqlServerProvider(new OcelotPipelineConfiguration());
             return builder;
         }
 
-        public static async Task<IApplicationBuilder> UseCustomOcelot(this IApplicationBuilder builder, OcelotPipelineConfiguration pipelineConfiguration)
+        public static async Task<IApplicationBuilder> UseOcelotWithSqlServerProvider(this IApplicationBuilder builder, OcelotPipelineConfiguration pipelineConfiguration)
         {
             var configuration = await CreateConfiguration(builder);
 

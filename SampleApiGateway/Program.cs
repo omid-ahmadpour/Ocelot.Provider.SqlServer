@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddOcelot()
-    .AddSqlServerForRoutesStorage(options =>
+    .AddSqlServerProvider(options =>
     {
         options.DbConnectionStrings = builder.Configuration.GetConnectionString("SqlServerDb");
         options.MigrationsAssembly = Assembly.GetExecutingAssembly().FullName;
@@ -26,7 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCustomOcelot().Wait();
+app.UseOcelotWithSqlServerProvider().Wait();
 
 app.UseHttpsRedirection();
 

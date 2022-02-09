@@ -10,7 +10,7 @@ namespace Ocelot.Provider.SqlServer.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IOcelotBuilder AddSqlServerForRoutesStorage(this IOcelotBuilder builder, Action<AppConfigs> option)
+        public static IOcelotBuilder AddSqlServerProvider(this IOcelotBuilder builder, Action<AppConfigs> option)
         {
             builder.Services.Configure(option);
 
