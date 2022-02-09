@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Ocelot.Configuration.Repository;
 using Ocelot.DependencyInjection;
 using Ocelot.Provider.SqlServer.Configuration;
+using Ocelot.Provider.SqlServer.Db;
 using Ocelot.Provider.SqlServer.Repository;
 
 namespace Ocelot.Provider.SqlServer.DependencyInjection
@@ -17,6 +18,8 @@ namespace Ocelot.Provider.SqlServer.DependencyInjection
                 resolver => resolver.GetRequiredService<IOptions<AppConfigs>>().Value);
 
             builder.Services.AddSingleton<IFileConfigurationRepository, SqlServerFileConfigurationRepository>();
+
+            builder.Services.AddDbContext<AppDbContext>();
 
             return builder;
         }
