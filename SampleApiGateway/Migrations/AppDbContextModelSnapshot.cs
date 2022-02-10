@@ -69,6 +69,13 @@ namespace SampleApiGateway.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OcelotGlobalConfigurations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GatewayName = "TestGateway"
+                        });
                 });
 
             modelBuilder.Entity("Ocelot.Provider.SqlServer.Models.OcelotRoute", b =>
@@ -86,6 +93,13 @@ namespace SampleApiGateway.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OcelotRoutes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Route = "{\r\n  \"DownstreamPathTemplate\": \"/{everything}\",\r\n  \"DownstreamScheme\": \"http\",\r\n  \"DownstreamHostAndPorts\": [\r\n    {\r\n      \"Host\": \"localhost\",\r\n      \"Port\": 5095\r\n    }\r\n  ],\r\n  \"UpstreamPathTemplate\": \"/gateway/{everything}\",\r\n  \"UpstreamHttpMethod\": [ \"Get\" ]\r\n}"
+                        });
                 });
 #pragma warning restore 612, 618
         }

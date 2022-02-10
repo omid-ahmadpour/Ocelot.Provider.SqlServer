@@ -12,7 +12,7 @@ using Ocelot.Provider.SqlServer.Db;
 namespace SampleApiGateway.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220210180304_InitDb")]
+    [Migration("20220210193846_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,13 @@ namespace SampleApiGateway.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OcelotGlobalConfigurations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GatewayName = "TestGateway"
+                        });
                 });
 
             modelBuilder.Entity("Ocelot.Provider.SqlServer.Models.OcelotRoute", b =>
@@ -88,6 +95,13 @@ namespace SampleApiGateway.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OcelotRoutes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Route = "{\r\n  \"DownstreamPathTemplate\": \"/{everything}\",\r\n  \"DownstreamScheme\": \"http\",\r\n  \"DownstreamHostAndPorts\": [\r\n    {\r\n      \"Host\": \"localhost\",\r\n      \"Port\": 5095\r\n    }\r\n  ],\r\n  \"UpstreamPathTemplate\": \"/gateway/{everything}\",\r\n  \"UpstreamHttpMethod\": [ \"Get\" ]\r\n}"
+                        });
                 });
 #pragma warning restore 612, 618
         }
