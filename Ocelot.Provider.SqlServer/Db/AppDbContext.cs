@@ -23,5 +23,15 @@ namespace Ocelot.Provider.SqlServer.Db
             optionsBuilder.UseSqlServer(_appConfigs.DbConnectionStrings,
                 b => b.MigrationsAssembly(_appConfigs.MigrationsAssembly));
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OcelotGlobalConfiguration>().HasData(new OcelotGlobalConfiguration {Id = 1, GatewayName = "TestGateway" });
+
+            var basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string route = File.ReadAllText(Path.Combine(basePath, "route.json"));
+
+            modelBuilder.Entity<OcelotRoute>().HasData(new OcelotRoute { Id = 1, Route = route });
+        }
     }
 }
