@@ -32,9 +32,20 @@ Install Ocelot.Provider.SqlServer and it’s dependencies using nuget. You will 
 > app.UseOcelotWithSqlServerProvider().Wait();
 ```
 
-## 4. Add SqlServer connection string in appsettings.json.
+## 4. Add SqlServer connection string in appsettings.json
 ```
 "ConnectionStrings": {
     "SqlServerDb": "Server=(localdb)\\mssqllocaldb;Database=OcelotDb;Trusted_Connection=True;MultipleActiveResultSets=true"
   },
  ```
+ 
+ ## 5. Database Migration
+ 
+  ### First:
+  Set your apigateway project as startup project
+  
+  ### Second:
+  Run following code in Package Manager Console
+  ```ruby
+  > Update-Database
+  ```
