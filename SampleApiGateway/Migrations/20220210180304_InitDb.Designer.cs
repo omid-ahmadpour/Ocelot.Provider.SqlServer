@@ -12,7 +12,7 @@ using Ocelot.Provider.SqlServer.Db;
 namespace SampleApiGateway.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220209202234_InitDb")]
+    [Migration("20220210180304_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,12 +33,10 @@ namespace SampleApiGateway.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("BaseUrl")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DownstreamScheme")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -48,7 +46,6 @@ namespace SampleApiGateway.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("HttpHandlerOptions")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
@@ -56,22 +53,18 @@ namespace SampleApiGateway.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LoadBalancerOptions")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("QoSOptions")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("RequestIdKey")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ServiceDiscoveryProvider")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 

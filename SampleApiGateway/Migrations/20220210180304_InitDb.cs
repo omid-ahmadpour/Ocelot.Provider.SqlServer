@@ -16,13 +16,13 @@ namespace SampleApiGateway.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GatewayName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    RequestIdKey = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    BaseUrl = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    DownstreamScheme = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ServiceDiscoveryProvider = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    QoSOptions = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    LoadBalancerOptions = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    HttpHandlerOptions = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    RequestIdKey = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    BaseUrl = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DownstreamScheme = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ServiceDiscoveryProvider = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    QoSOptions = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    LoadBalancerOptions = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    HttpHandlerOptions = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     LastUpdateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
