@@ -45,7 +45,12 @@ Install Ocelot.Provider.SqlServer and it’s dependencies using nuget. You will 
   Set your apigateway project as startup project
   
   ### Second:
-  Run following code in Package Manager Console
+  Run following ef command in Package Manager Console(with visual studio)
+  #### add migration
+  ```ruby
+  > Add-Migration InitDb
+  ```
+  #### update database
   ```ruby
   > Update-Database
   ```
