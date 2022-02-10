@@ -28,8 +28,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseOcelotWithSqlServerProvider().Wait();
 
-app.UseHttpsRedirection();
-
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
