@@ -19,7 +19,7 @@ namespace Ocelot.Provider.SqlServer.DependencyInjection
 
             builder.Services.AddSingleton<IFileConfigurationRepository, SqlServerFileConfigurationRepository>();
 
-            builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddSingleton<AppDbContext>();
 
             return builder;
         }

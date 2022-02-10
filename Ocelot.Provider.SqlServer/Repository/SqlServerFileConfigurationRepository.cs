@@ -1,10 +1,12 @@
 ﻿using Dapper;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Ocelot.Cache;
 using Ocelot.Configuration.File;
 using Ocelot.Configuration.Repository;
 using Ocelot.Logging;
 using Ocelot.Provider.SqlServer.Configuration;
+using Ocelot.Provider.SqlServer.Db;
 using Ocelot.Provider.SqlServer.Extensions;
 using Ocelot.Provider.SqlServer.Models;
 using Ocelot.Responses;
@@ -15,13 +17,16 @@ namespace Ocelot.Provider.SqlServer.Repository
     public class SqlServerFileConfigurationRepository : IFileConfigurationRepository
     {
         private readonly IOcelotCache<FileConfiguration> _cache;
+        private readonly AppDbContext _dbContext;
         private readonly AppConfigs _option;
 
         public SqlServerFileConfigurationRepository(AppConfigs option,
-            IOcelotCache<FileConfiguration> cache, IOcelotLoggerFactory loggerFactory)
+            IOcelotCache<FileConfiguration> cache, IOcelotLoggerFactory loggerFactory,
+            AppDbContext dbContext)
         {
             _option = option;
             _cache = cache;
+            _dbContext = dbContext;
         }
 
         public Task<Response> Set(FileConfiguration fileConfiguration)
@@ -40,11 +45,10 @@ namespace Ocelot.Provider.SqlServer.Repository
             }
 
             var file = new FileConfiguration();
-            const string sqlScript = "sp_OcelotGlobalConfiguration_GetFirst";
 
             await using (var connection = new SqlConnection(_option.DbConnectionStrings))
             {
-                var result = await connection.QueryFirstOrDefaultAsync<OcelotGlobalConfiguration>(sqlScript);
+                var result = await _dbContext.OcelotGlobalConfigurations.AsNoTracking().FirstOrDefaultAsync();
                 if (result != null)
                 {
                     var glb = new FileGlobalConfiguration
@@ -74,10 +78,7 @@ namespace Ocelot.Provider.SqlServer.Repository
 
                     try
                     {
-                        const string routeSql = "usp_OcelotRoutes_GetAll";
-
-                        var ocelotRoutes = await connection.QueryAsync<OcelotRoute>(routeSql,
-                            new { OcelotGlobalConfigurationId = result.Id });
+                        var ocelotRoutes = await _dbContext.OcelotRoutes.AsNoTracking().ToListAsync();
 
                         if (ocelotRoutes != null && ocelotRoutes.Any())
                         {
