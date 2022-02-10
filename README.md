@@ -54,3 +54,7 @@ Install Ocelot.Provider.SqlServer and it’s dependencies using nuget. You will 
   ```ruby
   > Update-Database
   ```
+  
+  ### Now check your database, you have two tables:
+  #### OcelotRoutes --> add your route to this table
+  #### OcelotGlobalConfigurations
