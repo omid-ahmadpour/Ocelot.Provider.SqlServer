@@ -1,5 +1,4 @@
-﻿using Dapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Ocelot.Cache;
 using Ocelot.Configuration.File;
@@ -8,7 +7,6 @@ using Ocelot.Logging;
 using Ocelot.Provider.SqlServer.Configuration;
 using Ocelot.Provider.SqlServer.Db;
 using Ocelot.Provider.SqlServer.Extensions;
-using Ocelot.Provider.SqlServer.Models;
 using Ocelot.Responses;
 using System.Data.SqlClient;
 
