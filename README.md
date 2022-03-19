@@ -3,7 +3,7 @@
 ## Getting Started
 Ocelot.Provider.SqlServer is designed to work with ASP.NET and is currently on net6.0.
 
-With this package you can save the routes in sql server instead of Json file and add the route dynamically.
+With this package you can save the routes in sql server instead of Json file and add route dynamically.
 
 ## .NET 6.0
 
@@ -54,3 +54,12 @@ Install Ocelot.Provider.SqlServer and it’s dependencies using nuget. You will 
   ```ruby
   > Update-Database
   ```
+  
+  ### Now check your database, you have two tables:
+  #### OcelotRoutes --> add your route to this table
+  #### OcelotGlobalConfigurations
+  
+  ### The source of a project that used Ocelot.Provider.SqlServer is also included.
+> [Sample for ApiGateway](https://github.com/omid-ahmadpour/Ocelot.Provider.SqlServer/tree/master/SampleApiGateway)
+> 
+> [Sample for Api](https://github.com/omid-ahmadpour/Ocelot.Provider.SqlServer/tree/master/SampleApi)
