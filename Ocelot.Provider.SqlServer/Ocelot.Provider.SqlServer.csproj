@@ -11,7 +11,7 @@ With this package you can save the Ocelot routes in sql server instead of Json f
     <PackageProjectUrl>https://github.com/omid-ahmadpour/Ocelot.Provider.SqlServer</PackageProjectUrl>
     <RepositoryUrl>https://github.com/omid-ahmadpour/Ocelot.Provider.SqlServer</RepositoryUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageTags></PackageTags>
+    <PackageTags>ocelot-gateway,ocelot-api-gateway,ocelot-provider,ocelot-provider-sqlserver,save-ocelot-routes,dynamic-routes</PackageTags>
     <Version>1.0.0</Version>
   </PropertyGroup>
 
