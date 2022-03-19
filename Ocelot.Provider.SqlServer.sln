@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocelot.Provider.SqlServer",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApiGateway", "SampleApiGateway\SampleApiGateway.csproj", "{65E55818-6FD6-4C79-B90D-2CEE56BF9A3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi", "SampleApi\SampleApi.csproj", "{63C0E17A-9E9C-4BF4-996B-932D08DFA530}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApi", "SampleApi\SampleApi.csproj", "{63C0E17A-9E9C-4BF4-996B-932D08DFA530}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{325A9526-E55F-409E-9C3C-BA612EAD8D9A}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\Omid\Desktop\Ocelot.Provicer.SqlServer.postman_collection.json = C:\Users\Omid\Desktop\Ocelot.Provicer.SqlServer.postman_collection.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
