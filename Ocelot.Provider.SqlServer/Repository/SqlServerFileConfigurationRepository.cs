@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Ocelot.Cache;
 using Ocelot.Configuration.File;
 using Ocelot.Configuration.Repository;
-using Ocelot.Logging;
 using Ocelot.Provider.SqlServer.Configuration;
 using Ocelot.Provider.SqlServer.Db;
 using Ocelot.Provider.SqlServer.Extensions;
@@ -19,8 +18,8 @@ namespace Ocelot.Provider.SqlServer.Repository
         private readonly AppConfigs _option;
 
         public SqlServerFileConfigurationRepository(AppConfigs option,
-            IOcelotCache<FileConfiguration> cache, IOcelotLoggerFactory loggerFactory,
-            AppDbContext dbContext)
+                                                    IOcelotCache<FileConfiguration> cache,
+                                                    AppDbContext dbContext)
         {
             _option = option;
             _cache = cache;
