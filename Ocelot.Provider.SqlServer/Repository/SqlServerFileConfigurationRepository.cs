@@ -43,118 +43,115 @@ namespace Ocelot.Provider.SqlServer.Repository
 
             var file = new FileConfiguration();
 
-            await using (var connection = new SqlConnection(_option.DbConnectionStrings))
+            var result = await _dbContext.OcelotGlobalConfigurations.AsNoTracking().FirstOrDefaultAsync();
+            if (result != null)
             {
-                var result = await _dbContext.OcelotGlobalConfigurations.AsNoTracking().FirstOrDefaultAsync();
-                if (result != null)
+                var glb = new FileGlobalConfiguration
                 {
-                    var glb = new FileGlobalConfiguration
-                    {
-                        BaseUrl = result.BaseUrl,
-                        DownstreamScheme = result.DownstreamScheme,
-                        RequestIdKey = result.RequestIdKey
-                    };
+                    BaseUrl = result.BaseUrl,
+                    DownstreamScheme = result.DownstreamScheme,
+                    RequestIdKey = result.RequestIdKey
+                };
 
-                    if (!string.IsNullOrEmpty(result.HttpHandlerOptions))
-                    {
-                        glb.HttpHandlerOptions = result.HttpHandlerOptions.ToObject<FileHttpHandlerOptions>();
-                    }
-                    if (!string.IsNullOrEmpty(result.LoadBalancerOptions))
-                    {
-                        glb.LoadBalancerOptions = result.LoadBalancerOptions.ToObject<FileLoadBalancerOptions>();
-                    }
-                    if (!string.IsNullOrEmpty(result.QoSOptions))
-                    {
-                        glb.QoSOptions = result.QoSOptions.ToObject<FileQoSOptions>();
-                    }
-                    if (!string.IsNullOrEmpty(result.ServiceDiscoveryProvider))
-                    {
-                        glb.ServiceDiscoveryProvider = result.ServiceDiscoveryProvider.ToObject<FileServiceDiscoveryProvider>();
-                    }
-                    file.GlobalConfiguration = glb;
+                if (!string.IsNullOrEmpty(result.HttpHandlerOptions))
+                {
+                    glb.HttpHandlerOptions = result.HttpHandlerOptions.ToObject<FileHttpHandlerOptions>();
+                }
+                if (!string.IsNullOrEmpty(result.LoadBalancerOptions))
+                {
+                    glb.LoadBalancerOptions = result.LoadBalancerOptions.ToObject<FileLoadBalancerOptions>();
+                }
+                if (!string.IsNullOrEmpty(result.QoSOptions))
+                {
+                    glb.QoSOptions = result.QoSOptions.ToObject<FileQoSOptions>();
+                }
+                if (!string.IsNullOrEmpty(result.ServiceDiscoveryProvider))
+                {
+                    glb.ServiceDiscoveryProvider = result.ServiceDiscoveryProvider.ToObject<FileServiceDiscoveryProvider>();
+                }
+                file.GlobalConfiguration = glb;
 
-                    try
-                    {
-                        var ocelotRoutes = await _dbContext.OcelotRoutes.AsNoTracking().ToListAsync();
+                try
+                {
+                    var ocelotRoutes = await _dbContext.OcelotRoutes.AsNoTracking().ToListAsync();
 
-                        if (ocelotRoutes != null && ocelotRoutes.Any())
+                    if (ocelotRoutes != null && ocelotRoutes.Any())
+                    {
+                        var routeList = new List<FileRoute>();
+                        foreach (var model in ocelotRoutes)
                         {
-                            var routeList = new List<FileRoute>();
-                            foreach (var model in ocelotRoutes)
+                            var m = new FileRoute();
+                            var fileRoute = JsonConvert.DeserializeObject<FileRoute>(model.Route);
+
+                            if (fileRoute is null)
                             {
-                                var m = new FileRoute();
-                                var fileRoute = JsonConvert.DeserializeObject<FileRoute>(model.Route);
-
-                                if (fileRoute is null)
-                                {
-                                    continue;
-                                }
-
-                                if (fileRoute.AddHeadersToRequest != null)
-                                {
-                                    m.AddHeadersToRequest = fileRoute.AddHeadersToRequest;
-                                }
-
-                                if (fileRoute.AuthenticationOptions != null)
-                                {
-                                    m.AuthenticationOptions = fileRoute.AuthenticationOptions;
-                                }
-
-                                //if (!String.IsNullOrEmpty(fileRoute.CacheOptions))
-                                //{
-                                //    m.FileCacheOptions = model.CacheOptions.ToObject<FileCacheOptions>();
-                                //}
-
-                                if (fileRoute.DelegatingHandlers != null)
-                                {
-                                    m.DelegatingHandlers = fileRoute.DelegatingHandlers;
-                                }
-
-                                if (fileRoute.LoadBalancerOptions != null)
-                                {
-                                    m.LoadBalancerOptions = fileRoute.LoadBalancerOptions;
-                                }
-
-                                if (fileRoute.QoSOptions != null)
-                                {
-                                    m.QoSOptions = fileRoute.QoSOptions;
-                                }
-
-                                if (fileRoute.DownstreamHostAndPorts != null)
-                                {
-                                    m.DownstreamHostAndPorts = fileRoute.DownstreamHostAndPorts;
-                                }
-
-                                m.DownstreamPathTemplate = fileRoute.DownstreamPathTemplate;
-                                m.DownstreamScheme = fileRoute.DownstreamScheme;
-                                m.Key = fileRoute.Key;
-                                m.Priority = fileRoute.Priority;
-                                m.RequestIdKey = fileRoute.RequestIdKey;
-                                m.ServiceName = fileRoute.ServiceName;
-                                m.Timeout = fileRoute.Timeout;
-                                m.UpstreamHost = fileRoute.UpstreamHost;
-
-                                if (fileRoute.UpstreamHttpMethod != null)
-                                {
-                                    m.UpstreamHttpMethod = fileRoute.UpstreamHttpMethod;
-                                }
-
-                                m.UpstreamPathTemplate = fileRoute.UpstreamPathTemplate;
-                                routeList.Add(m);
+                                continue;
                             }
-                            file.Routes = routeList;
+
+                            if (fileRoute.AddHeadersToRequest != null)
+                            {
+                                m.AddHeadersToRequest = fileRoute.AddHeadersToRequest;
+                            }
+
+                            if (fileRoute.AuthenticationOptions != null)
+                            {
+                                m.AuthenticationOptions = fileRoute.AuthenticationOptions;
+                            }
+
+                            //if (!String.IsNullOrEmpty(fileRoute.CacheOptions))
+                            //{
+                            //    m.FileCacheOptions = model.CacheOptions.ToObject<FileCacheOptions>();
+                            //}
+
+                            if (fileRoute.DelegatingHandlers != null)
+                            {
+                                m.DelegatingHandlers = fileRoute.DelegatingHandlers;
+                            }
+
+                            if (fileRoute.LoadBalancerOptions != null)
+                            {
+                                m.LoadBalancerOptions = fileRoute.LoadBalancerOptions;
+                            }
+
+                            if (fileRoute.QoSOptions != null)
+                            {
+                                m.QoSOptions = fileRoute.QoSOptions;
+                            }
+
+                            if (fileRoute.DownstreamHostAndPorts != null)
+                            {
+                                m.DownstreamHostAndPorts = fileRoute.DownstreamHostAndPorts;
+                            }
+
+                            m.DownstreamPathTemplate = fileRoute.DownstreamPathTemplate;
+                            m.DownstreamScheme = fileRoute.DownstreamScheme;
+                            m.Key = fileRoute.Key;
+                            m.Priority = fileRoute.Priority;
+                            m.RequestIdKey = fileRoute.RequestIdKey;
+                            m.ServiceName = fileRoute.ServiceName;
+                            m.Timeout = fileRoute.Timeout;
+                            m.UpstreamHost = fileRoute.UpstreamHost;
+
+                            if (fileRoute.UpstreamHttpMethod != null)
+                            {
+                                m.UpstreamHttpMethod = fileRoute.UpstreamHttpMethod;
+                            }
+
+                            m.UpstreamPathTemplate = fileRoute.UpstreamPathTemplate;
+                            routeList.Add(m);
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        throw;
+                        file.Routes = routeList;
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    throw new Exception("Exception occurred in SqlServerFileConfigurationRepository");
+                    Console.WriteLine(ex.Message);
+                    throw;
                 }
+            }
+            else
+            {
+                throw new Exception("Exception occurred in SqlServerFileConfigurationRepository");
             }
 
             if (file.Routes == null || file.Routes.Count == 0)
