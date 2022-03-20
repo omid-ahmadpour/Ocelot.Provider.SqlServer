@@ -51,7 +51,7 @@ namespace SampleApiGateway.Migrations
             migrationBuilder.InsertData(
                 table: "OcelotRoutes",
                 columns: new[] { "Id", "Route" },
-                values: new object[] { 1, "{\r\n  \"DownstreamPathTemplate\": \"/{everything}\",\r\n  \"DownstreamScheme\": \"http\",\r\n  \"DownstreamHostAndPorts\": [\r\n    {\r\n      \"Host\": \"localhost\",\r\n      \"Port\": 5095\r\n    }\r\n  ],\r\n  \"UpstreamPathTemplate\": \"/gateway/{everything}\",\r\n  \"UpstreamHttpMethod\": [ \"Get\" ]\r\n}" });
+                values: new object[] { 1, "{\r\n  \"DownstreamPathTemplate\": \"/{everything}\",\r\n  \"DownstreamScheme\": \"http\",\r\n  \"DownstreamHostAndPorts\": [\r\n    {\r\n      \"Host\": \"localhost\",\r\n      \"Port\": 5095\r\n    }\r\n  ],\r\n  \"UpstreamPathTemplate\": \"/gateway/{everything}\",\r\n  \"UpstreamHttpMethod\": [\r\n    \"Get\"\r\n  ]\r\n}" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
