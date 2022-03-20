@@ -5,23 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Authors>Omid Ahmadpour</Authors>
-    <Description>Ocelot.Provider.SqlServer is designed to work with ASP.NET and is currently on net6.0.
-
-With this package you can save the Ocelot routes in sql server instead of Json file and add route dynamically</Description>
+    <Description>With this package you can save the Ocelot routes in sql server instead of Json file and add route dynamically.</Description>
     <PackageProjectUrl>https://github.com/omid-ahmadpour/Ocelot.Provider.SqlServer</PackageProjectUrl>
     <RepositoryUrl>https://github.com/omid-ahmadpour/Ocelot.Provider.SqlServer</RepositoryUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>ocelot-gateway,ocelot-api-gateway,ocelot-provider,ocelot-provider-sqlserver,save-ocelot-routes,dynamic-routes</PackageTags>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="route.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />

@@ -7,7 +7,6 @@ using Ocelot.Provider.SqlServer.Configuration;
 using Ocelot.Provider.SqlServer.Db;
 using Ocelot.Provider.SqlServer.Extensions;
 using Ocelot.Responses;
-using System.Data.SqlClient;
 
 namespace Ocelot.Provider.SqlServer.Repository
 {
