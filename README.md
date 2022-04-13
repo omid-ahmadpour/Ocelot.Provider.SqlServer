@@ -65,5 +65,5 @@ Install Ocelot.Provider.SqlServer using nuget. You will need to create a net6.0 
 > [Sample for Api](https://github.com/omid-ahmadpour/Ocelot.Provider.SqlServer/tree/master/SampleApi)
 
 ##
-Please share yout thoughts, feedback or suggestions.
+Please share your thoughts, feedback or suggestions.
 I would love to hear from you and I response to every single issue or message.
