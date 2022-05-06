@@ -14,6 +14,10 @@ Install Ocelot.Provider.SqlServer using nuget. You will need to create a net6.0 
   > Install-Package Ocelot.Provicer.SqlServer
   ```
   
+  Nuget Address: 
+  
+  https://www.nuget.org/packages/Ocelot.Provider.SqlServer/
+  
 ## 2. Register Ocelot.Provider.SqlServer
 ### in Program.cs
 
