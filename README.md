@@ -11,7 +11,7 @@ With this package you can store the Ocelot routes in sql server instead of Json 
 Install Ocelot.Provider.SqlServer using nuget. You will need to create a net6.0 project and bring the package into it. Then follow the Startup below and Configuration sections to get up and running.
 
 ```ruby
-  > Install-Package Ocelot.Provicer.SqlServer
+  > Install-Package Ocelot.Provider.SqlServer
   ```
   
   Nuget Address: 
